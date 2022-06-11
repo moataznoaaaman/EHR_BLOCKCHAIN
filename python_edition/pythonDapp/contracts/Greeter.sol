@@ -2,7 +2,7 @@ pragma solidity >=0.4.22 <0.9.0;
 contract Greeter{
 
     string public greeting;
-
+    
 
     string[] in_clinic_records;
     //clinic1 address, clinic1 registered_patients, clinic1 records
@@ -30,9 +30,9 @@ contract Greeter{
 
         constructor() public {
              greeting = 'Hello';
-             clinic1_address = 0xA18701FcEfcB34548e3F1168018072acFceD24A3;
-             clinic2_address = 0x76d4fCF227AF4A6464F093566eD980Dfe7227CB8;
-             clinic3_address = 0x042607F7A3CeD2E6014D0B23E869EDD5471a54bc;
+             clinic1_address = 0x3ba20A3D2b870BC377F47AE68dAE0845ed2c2fF4;
+             clinic2_address = 0x255d58708D85b74fF56Fd2ba31BA23E04bd83163;
+             clinic3_address = 0x1216Fb7CA180FBCAb13593c69acFcA2F1AAd0fAD;
          }
 
         function add_patient(string memory _message, bytes32 hashed_message, uint8 v, bytes32 r, bytes32 s) public {
@@ -42,7 +42,7 @@ contract Greeter{
             address retrived_address = ret_add(ethSignedMessageHash, v, r, s);
 
             // making sure that the message was not manipulated
-            require(keccak256(abi.encodePacked(_message)) == hashed_message, 'message has been alterd');
+            //require(keccak256(abi.encodePacked(_message)) == hashed_message, 'message has been alterd');
             // making sure that the sender correspond to the address
             require(retrived_address == msg.sender, 'address dont match');
             if(msg.sender == clinic1_address) {   
@@ -209,6 +209,22 @@ contract Greeter{
         }
 
         //////////////////////////////////////////// helpers ////////////////////////////////////////////////
+        
+        function retrive_records1() public returns (string[] memory)
+        {
+            return clinic1_records;
+        }
+
+        function retrive_records2() public returns (string[] memory)
+        {
+            return clinic2_records;
+        }
+
+        function retrive_records3() public returns (string[] memory)
+        {
+            return clinic3_records;
+        }
+
         function ret_add(bytes32 _ethSignedMessageHash, uint8 v, bytes32 r, bytes32 s) public returns(address)
         {
             return ecrecover(_ethSignedMessageHash, v, r, s);
