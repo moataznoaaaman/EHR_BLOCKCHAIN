@@ -35,14 +35,14 @@ contract Greeter{
              clinic3_address = 0x1216Fb7CA180FBCAb13593c69acFcA2F1AAd0fAD;
          }
 
-        function add_patient(string memory _message, bytes32 hashed_message, uint8 v, bytes32 r, bytes32 s) public {
+        function add_patient(string memory _message, uint8 v, bytes32 r, bytes32 s) public {
 
             bytes32 messageHash = getMessageHash(_message);
             bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
             address retrived_address = ret_add(ethSignedMessageHash, v, r, s);
 
             // making sure that the message was not manipulated
-            //require(keccak256(abi.encodePacked(_message)) == hashed_message, 'message has been alterd');
+            
             // making sure that the sender correspond to the address
             require(retrived_address == msg.sender, 'address dont match');
             if(msg.sender == clinic1_address) {   
@@ -83,14 +83,14 @@ contract Greeter{
                 
         }
 
-        function add_reg_visit(string memory _message, bytes32 hashed_message, uint8 v, bytes32 r, bytes32 s) public {
+        function add_reg_visit(string memory _message, uint8 v, bytes32 r, bytes32 s) public {
 
             bytes32 messageHash = getMessageHash(_message);
             bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
             address retrived_address = ret_add(ethSignedMessageHash, v, r, s);
 
             // making sure that the message was not manipulated
-            require(keccak256(abi.encodePacked(_message)) == hashed_message, 'message has been alterd');
+            
             // making sure that the sender correspond to the address
             require(retrived_address == msg.sender, 'address dont match');
             
@@ -129,14 +129,13 @@ contract Greeter{
             
         }
 
-        function add_lab_visit(string memory _message, bytes32 hashed_message, uint8 v, bytes32 r, bytes32 s) public {
+        function add_lab_visit(string memory _message, uint8 v, bytes32 r, bytes32 s) public {
 
             bytes32 messageHash = getMessageHash(_message);
             bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
             address retrived_address = ret_add(ethSignedMessageHash, v, r, s);
 
             // making sure that the message was not manipulated
-            require(keccak256(abi.encodePacked(_message)) == hashed_message, 'message has been alterd');
             // making sure that the sender correspond to the address
             require(retrived_address == msg.sender, 'address dont match');
 
@@ -175,14 +174,14 @@ contract Greeter{
             
         }
 
-        function define_records(string memory _message, bytes32 hashed_message, uint8 v, bytes32 r, bytes32 s) public{
+        function define_records(string memory _message, uint8 v, bytes32 r, bytes32 s) public{
 
             bytes32 messageHash = getMessageHash(_message);
             bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
             address retrived_address = ret_add(ethSignedMessageHash, v, r, s);
 
             // making sure that the message was not manipulated
-            require(keccak256(abi.encodePacked(_message)) == hashed_message, 'message has been alterd');
+            
             // making sure that the sender correspond to the address
             require(retrived_address == msg.sender, 'address dont match');
 
