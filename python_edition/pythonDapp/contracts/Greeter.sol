@@ -30,9 +30,9 @@ contract Greeter{
 
         constructor() public {
              greeting = 'Hello';
-             clinic1_address = 0x3ba20A3D2b870BC377F47AE68dAE0845ed2c2fF4;
-             clinic2_address = 0x255d58708D85b74fF56Fd2ba31BA23E04bd83163;
-             clinic3_address = 0x1216Fb7CA180FBCAb13593c69acFcA2F1AAd0fAD;
+             clinic1_address = 0xB00B6600F7FF04DFfC91be88342E17C220fC9E5A;// modify with the respective address in the App.ipynb file for clinic1
+             clinic2_address = 0xCC6441c647fb77d1686F3528AFf788E39201d283;// modify with the respective address in the App.ipynb file for clinic2
+             clinic3_address = 0xBCCD9d91b8D9Ff6D5bE20b7cDCbF36E0bE1fEcEB; // modify with the respective address in the App.ipynb file for clinic1
          }
 
         function add_patient(string memory _message, uint8 v, bytes32 r, bytes32 s) public {
@@ -41,10 +41,10 @@ contract Greeter{
             bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
             address retrived_address = ret_add(ethSignedMessageHash, v, r, s);
 
-            // making sure that the message was not manipulated
             
-            // making sure that the sender correspond to the address
-            require(retrived_address == msg.sender, 'address dont match');
+            
+            // making sure that the sender correspond to the address and the message is not altered
+            require(retrived_address == msg.sender, 'address dont match or the message is altered');
             if(msg.sender == clinic1_address) {   
 
                 // fetch the patient id
@@ -89,10 +89,10 @@ contract Greeter{
             bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
             address retrived_address = ret_add(ethSignedMessageHash, v, r, s);
 
-            // making sure that the message was not manipulated
+            
             
             // making sure that the sender correspond to the address
-            require(retrived_address == msg.sender, 'address dont match');
+            require(retrived_address == msg.sender, 'address dont match or the message is altered');
             
             if(msg.sender == clinic1_address) {   
 
@@ -135,9 +135,9 @@ contract Greeter{
             bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
             address retrived_address = ret_add(ethSignedMessageHash, v, r, s);
 
-            // making sure that the message was not manipulated
+            
             // making sure that the sender correspond to the address
-            require(retrived_address == msg.sender, 'address dont match');
+            require(retrived_address == msg.sender, 'address dont match or the message is alteredh');
 
             if(msg.sender == clinic1_address) {   
 
@@ -180,8 +180,6 @@ contract Greeter{
             bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
             address retrived_address = ret_add(ethSignedMessageHash, v, r, s);
 
-            // making sure that the message was not manipulated
-            
             // making sure that the sender correspond to the address
             require(retrived_address == msg.sender, 'address dont match');
 
